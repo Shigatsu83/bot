@@ -7,8 +7,8 @@ import asyncio
 
 url = "https://mc.aubilius.tech/api/v2/auth/login"
 data = {
-    'username' : 'cihuy',
-    'password' : 'cihuy444'
+    'username' : '<crafty_username>',
+    'password' : '<crafty_password>'
 }
 session = req.Session()
 doLogin = session.post(url, json=data)
