@@ -109,7 +109,7 @@ async def serverOff(ctx):
     available_servers = parsed_data['data']
 
     # Display the list of available servers with numbering
-    server_list_message = "Pilih server yang mau dinyalakan:\n"
+    server_list_message = "Pilih server yang mau dimatikan:\n"
     for index, server in enumerate(available_servers, start=1):
         server_list_message += f"{index}. {server['server_name']}\n"
     await ctx.send(server_list_message)
