@@ -5,7 +5,7 @@ import json
 import os
 import asyncio
 
-url = "https://mc.aubilius.tech/api/v2/auth/login"
+url = "https://mc.your-crafty-domain.tech/api/v2/auth/login"
 data = {
     'username' : '<crafty_username>',
     'password' : '<crafty_password>'
@@ -32,7 +32,7 @@ async def man(ctx):
 @client.command()
 async def list(ctx):
     header = {"Authorization": f"{token_key}"}
-    url = "https://mc.aubilius.tech/api/v2/servers"
+    url = "https://mc.your-crafty-domain.tech/api/v2/servers"
     doRequest = session.get(url, headers=header)
     
     content = doRequest.content
@@ -51,7 +51,7 @@ async def list(ctx):
 async def serverOn(ctx):
     # Get the list of available servers (assuming you have it stored somewhere)
     header = {"Authorization": f"{token_key}"}
-    url = "https://mc.aubilius.tech/api/v2/servers"
+    url = "https://mc.your-crafty-domain.tech/api/v2/servers"
     doRequest = session.get(url, headers=header)
     
     content = doRequest.content
@@ -101,7 +101,7 @@ async def serverOn(ctx):
 async def serverOff(ctx):
     # Get the list of available servers (assuming you have it stored somewhere)
     header = {"Authorization": f"{token_key}"}
-    url = "https://mc.aubilius.tech/api/v2/servers"
+    url = "https://mc.your-crafty-domain.tech/api/v2/servers"
     doRequest = session.get(url, headers=header)
     
     content = doRequest.content
