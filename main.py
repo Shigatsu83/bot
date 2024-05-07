@@ -5,10 +5,10 @@ import json
 import os
 import asyncio
 
-url = "https://mc.your-crafty-domain.tech/api/v2/auth/login"
+url = "https://mc.<crafty_domain>.tech/api/v2/auth/login"
 data = {
-    'username' : '<crafty_username>',
-    'password' : '<crafty_password>'
+    'username' : '<username>',
+    'password' : '<password>'
 }
 session = req.Session()
 doLogin = session.post(url, json=data)
@@ -32,7 +32,7 @@ async def man(ctx):
 @client.command()
 async def list(ctx):
     header = {"Authorization": f"{token_key}"}
-    url = "https://mc.your-crafty-domain.tech/api/v2/servers"
+    url = "https://mc.<crafty_domain>.tech/api/v2/servers"
     doRequest = session.get(url, headers=header)
     
     content = doRequest.content
@@ -41,16 +41,23 @@ async def list(ctx):
     message = "## Halo! Ini Informasi server yang kamu minta:\n\n>>> "
     serversDetail = parsedData['data']
     for item in serversDetail:
-        server_id = item['server_id']
-        server_name = item['server_name']
-        message += f'Server ID: {server_id}\nServer Name: {server_name}\n\n'
+            server_id = item['server_id']
+            server_name = item['server_name']
+            doRequest = session.get(url + f"/{server_id}/stats", headers=header)
+            content = doRequest.content
+            parsedData = json.loads(content)
+            running = parsedData['data']['running']
+            if running == True:
+                message += f'Server ID: {server_id}\nServer Name: {server_name}\nServer Status: Online\n\n'
+            else:
+                message += f'Server ID: {server_id}\nServer Name: {server_name}\nServer Status: Offline\n\n'
 
     await ctx.send(f'{message}')
     
 @client.command()
 async def serverOn(ctx):
     header = {"Authorization": f"{token_key}"}
-    url = "https://mc.your-crafty-domain.tech/api/v2/servers"
+    url = "https://mc.<crafty_domain>.tech/api/v2/servers"
     doRequest = session.get(url, headers=header)
     
     content = doRequest.content
@@ -90,7 +97,7 @@ async def serverOn(ctx):
 @client.command()
 async def serverOff(ctx):
     header = {"Authorization": f"{token_key}"}
-    url = "https://mc.your-crafty-domain.tech/api/v2/servers"
+    url = "https://mc.<crafty_domain>.tech/api/v2/servers"
     doRequest = session.get(url, headers=header)
     
     content = doRequest.content
@@ -126,4 +133,4 @@ async def serverOff(ctx):
     except asyncio.TimeoutError:
         await ctx.send("Waktu habis. Silakan coba lagi nanti.")
 
-client.run('token')    
+client.run('<bot_token>')    
