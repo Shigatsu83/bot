@@ -1,1 +1,1 @@
-###ini bot  ya
+# Crafty Controller Discord Bot
